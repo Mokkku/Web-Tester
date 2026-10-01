@@ -117,8 +117,8 @@ class WebTester:
         context.set_alpn_protocols(['http/1.1', 'h2'])
         
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((self.host, 443))
         conn = context.wrap_socket(sock, server_hostname=self.host)
-        conn.connect((self.host, 443))
         proto = conn.selected_alpn_protocol()
         if proto == 'h2':
             supporthttp2 = "yes"
