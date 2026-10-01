@@ -63,7 +63,7 @@ class WebTester:
 
     def send_http_request(self):
         self.filepath = self.filepath if self.filepath else "/"
-        self.request = f"GET {self.filepath} HTTP/1.1\r\nHost: {self.host}\r\nConnection: close\r\n\r\n".encode()
+        self.request = f"GET {self.filepath} HTTP/1.1\r\nHost: {self.host}\r\nConnection: close\r\n\r\n".encode('utf-8')
         self.socket.sendall(self.request)
 
     def receive_response(self):
@@ -73,7 +73,7 @@ class WebTester:
             if not data:
                 break
             reply += data
-        reply = reply.decode()
+        reply = reply.decode('utf-8')
 
         self.head, self.body, self.statusCode = parse_response(reply)
 
@@ -97,7 +97,7 @@ class WebTester:
                 # reconfigure webTester attributes
                 self.filepath = self.filepath if self.filepath else "/"
                 self.protocol, self.host, self.port, self.filepath = parse_uri(newUri)
-                self.request = f"GET {self.filepath} HTTP/1.1\r\nHost: {self.host}\r\nConnection: close\r\n\r\n".encode()
+                self.request = f"GET {self.filepath} HTTP/1.1\r\nHost: {self.host}\r\nConnection: close\r\n\r\n".encode('utf-8')
 
                 # open a new connection, send request and recieve response
                 self.open_connection()
