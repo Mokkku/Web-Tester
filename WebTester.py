@@ -90,13 +90,16 @@ class WebTester:
                 # new instance of connection
 
                 # set up uri for parsing 
-                newUri = location
-                if "https" not in newUri and "http" not in newUri:
-                    newUri = "https://" + newUri
+                if location.startswith('/'):
+                    self.filepath = location
+                else:
+                    newUri = location
+                    if "https" not in newUri and "http" not in newUri:
+                        newUri = "https://" + newUri
 
-                # reconfigure webTester attributes
-                self.filepath = self.filepath if self.filepath else "/"
-                self.protocol, self.host, self.port, self.filepath = parse_uri(newUri)
+                    # reconfigure webTester attributes
+                    self.filepath = self.filepath if self.filepath else "/"
+                    self.protocol, self.host, self.port, self.filepath = parse_uri(newUri)
                 self.request = f"GET {self.filepath} HTTP/1.1\r\nHost: {self.host}\r\nConnection: close\r\n\r\n".encode('utf-8')
 
                 # open a new connection, send request and recieve response
@@ -135,7 +138,8 @@ class WebTester:
 
 def main():
 
-    uri = input("Enter URI: ")
+    # uri = input("Enter URI: ")
+    uri = "http://httpbin.org/redirect/10"
     if "https" not in uri and "http" not in uri:
         uri = "https://" + uri
     try:
@@ -160,7 +164,7 @@ def main():
                 print(", domain name: " + cookies[cookie][2], end = "")
             print("")
         print("3. password-protected: " + passwordProtected)
-
+        
     except ValueError as error:
         print(f"[Error] {error}")
     except socket.gaierror as error:
