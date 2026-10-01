@@ -73,7 +73,7 @@ class WebTester:
             if not data:
                 break
             reply += data
-        reply = reply.decode('utf-8')
+        reply = reply.decode('utf-8', errors="replace")
 
         self.head, self.body, self.statusCode = parse_response(reply)
 
