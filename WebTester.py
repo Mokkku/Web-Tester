@@ -138,8 +138,7 @@ class WebTester:
 
 def main():
 
-    # uri = input("Enter URI: ")
-    uri = "http://httpbin.org/redirect/10"
+    uri = input("Enter URI: ")
     if "https" not in uri and "http" not in uri:
         uri = "https://" + uri
     try:
@@ -164,7 +163,7 @@ def main():
                 print(", domain name: " + cookies[cookie][2], end = "")
             print("")
         print("3. password-protected: " + passwordProtected)
-        
+
     except ValueError as error:
         print(f"[Error] {error}")
     except socket.gaierror as error:
