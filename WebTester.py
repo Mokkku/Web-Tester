@@ -152,6 +152,19 @@ def main():
         cookies = extract_cookies(webTester.head)
         passwordProtected = webTester.check_password_protection()
 
+        print("--Request Begin--\n")
+        print(webTester.request)
+        print("\n")
+        print("--Request End--\n\n")
+
+        print("--Response Header--\n")
+        print(webTester.head)
+        print("\n\n")
+
+        print("--Response Body--\n")
+        print(webTester.body)
+        print("\n\n")
+
         print("website: "+webTester.host)
         print("1. Supports http2: " + http2Support)
         print("2. List of Cookies:")
