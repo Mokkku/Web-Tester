@@ -168,6 +168,8 @@ def main():
         print(f"[Error] {error}")
     except socket.gaierror as error:
         print(f"{error}. Address could not be found. please enter a valid uri.")
+    except ConnectionRefusedError as error:
+        print(f"{error}.")
 
     return
             
